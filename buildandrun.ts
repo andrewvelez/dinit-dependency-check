@@ -3,15 +3,20 @@
  * build file for this project
  */
 import { $ } from 'bun';
+import { PONOS_ANDREW_HOME_DIR } from './constants';
 
 await Bun.build({
-  entrypoints: ["/home/andrew/Code/dinit-dependency-graph/ddepcheck.ts"],
+  entrypoints: [PONOS_ANDREW_HOME_DIR + "/ddepcheck.ts"],
   compile: {
-    outfile: "/home/andrew/Code/dinit-dependency-graph/bin/dinit-dependency-graph",
+    outfile: PONOS_ANDREW_HOME_DIR + "/bin/dinit-dependency-graph",
   },
   minify: true,
   sourcemap: "linked",
   bytecode: true,
 });
 
-await $`/home/andrew/Code/dinit-dependency-graph/bin/dinit-dependency-graph`;
+const process = Bun.spawn([PONOS_ANDREW_HOME_DIR + "/bin/dinit-dependency-graph"], {
+  stdio: ["inherit", "inherit", "inherit"],
+});
+
+await process.exited;
