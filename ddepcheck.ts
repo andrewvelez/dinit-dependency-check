@@ -149,12 +149,9 @@ async function parseDirectoryDependencies(baseDirectory: string, serviceName: st
 /**
  * Recursively discover all services starting from boot
  */
-async function discoverServices(
-  baseDirectory: string,
-  serviceName: string,
-  discovered = new Set<string>(),
-  serviceCache = new Map<string, ServiceDependencies>()
-): Promise<Set<string>> {
+async function discoverServices(baseDirectory: string, serviceName: string, discovered = new Set<string>(),
+  serviceCache = new Map<string, ServiceDependencies>()): Promise<Set<string>> {
+
   const cleanName = serviceName.replace(/\.service$/, '');
 
   if (discovered.has(cleanName)) {
@@ -295,7 +292,7 @@ function topologicalSort(discoveredServices: Set<string>, serviceCache: Map<stri
  */
 async function findBootService(directory: string): Promise<string> {
   const files = await readdir(directory);
-  const bootFile = files.find(file => file === 'boot' || file === 'boot.service');
+  const bootFile = files.find(file => file === 'boot');
 
   if (!bootFile) {
     throw new Error('No boot service file found in directory');
