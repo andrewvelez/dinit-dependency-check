@@ -2,15 +2,16 @@
 /**
  * build file for this project
  */
+import { $ } from 'bun';
 
 await Bun.build({
-  entrypoints: ["./ddepcheck.ts"],
+  entrypoints: ["/home/andrew/Code/dinit-dependency-graph/ddepcheck.ts"],
   compile: {
-    outfile: "./bin/dinit-dependency-graph",
+    outfile: "/home/andrew/Code/dinit-dependency-graph/bin/dinit-dependency-graph",
   },
   minify: true,
   sourcemap: "linked",
   bytecode: true,
 });
 
-await $`./bin/dinit-dependency-graph`;
+await $`/home/andrew/Code/dinit-dependency-graph/bin/dinit-dependency-graph`;
