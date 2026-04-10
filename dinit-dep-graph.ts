@@ -3,10 +3,43 @@
  * ddepcheck output bin command is dinit-dependency-graph
  * by:  Andrew Velez
  */
-import { readFile, access, readdir } from 'node:fs/promises';
-import { join } from 'node:path';
-import { DiGraph } from 'digraph-js';
+import { parseArgs } from "util";
 
+async function getOptions() {
 
-const directory = process.argv[2] || '.';
-main(directory);
+  const { values, positionals } = parseArgs({
+    args: Bun.argv,
+    options: {
+      help: {
+        type: "boolean",
+        short: "h",
+      },
+      serviceDirectory: {
+        type: "string",
+        short: "d",
+        default: ".",
+      },
+    },
+    strict: true,
+    allowPositionals: true,
+  });
+
+  if (values.help) {
+    console.log(`
+Usage: dinit-dependency-graph [options] <directory>
+
+Options:
+  -h, --help     Show this help message
+  --verbose      Enable verbose logging
+  `);
+    process.exit(0);
+  }
+
+  return { values, positionals }
+}
+
+async function main() {
+  const options = getOptions();
+}
+
+main();

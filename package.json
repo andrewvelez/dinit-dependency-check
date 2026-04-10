@@ -9,6 +9,12 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "digraph-js": "^2.2.4"
+    "digraph-js": "^2.2.4",
+    "rescript": "12.2.0"
+  },
+  "scripts": {
+    "res:build": "rescript",
+    "res:clean": "rescript clean",
+    "res:dev": "rescript watch"
   }
 }
